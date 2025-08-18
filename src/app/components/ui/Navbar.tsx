@@ -2,18 +2,23 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
+    Book,
+    BookOpen,
     ChevronDown,
     Contact,
+    Gift,
     Globe,
     Home,
     Info,
     Menu,
     User,
+    Video,
     X
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { itemVariants } from "../animation/Homepage";
 import KnowledgeBaseDropdown from "./Navbar/KnowledgeBaseDropdown";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -75,6 +80,7 @@ const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const [scrollActive, setScrollActive] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<{ [key: string]: boolean }>({});
 
     useEffect(() => {
         const endpoint = pathname.split("/").filter(Boolean).pop() || "";
@@ -124,6 +130,10 @@ const Navbar = () => {
             router.push(`/?scrollTo=${section}`);
         }
         setMobileMenuOpen(false);
+    };
+
+    const toggleSubmenu = (menu: string) => {
+        setMobileSubMenuOpen(prev => ({ ...prev, [menu]: !prev[menu] }));
     };
 
     return (
@@ -229,13 +239,7 @@ const Navbar = () => {
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-40 bg-[hsl(210,40%,98%)]/80 backdrop-blur-sm lg:hidden"
-                        onClick={() => setMobileMenuOpen(false)}
-                    >
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-[hsl(210,40%,98%)]/80 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)}>
                         <motion.div
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
@@ -248,113 +252,99 @@ const Navbar = () => {
                                 <h2 className="text-lg font-bold text-[hsl(222.2,84%,4.9%)]">
                                     <span className="text-[hsl(221.2,83.2%,53.3%)]">Artha</span>lab
                                 </h2>
-                                <motion.button
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="p-2 rounded-full bg-[hsl(210,40%,96.1%)] text-[hsl(215.4,16.3%,46.9%)]"
-                                >
+                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-full bg-[hsl(210,40%,96.1%)] text-[hsl(215.4,16.3%,46.9%)]">
                                     <X className="h-5 w-5" />
                                 </motion.button>
                             </div>
 
                             <div className="space-y-4">
-                                <Link
-                                    href="/"
-                                    className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                    onClick={() => {
-                                        setActiveLink("home");
-                                        setMobileMenuOpen(false);
-                                    }}
-                                >
-                                    <Home
-                                        className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Home
-                                    </span>
+                                {/* Home */}
+                                <Link href="/" className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors" onClick={() => { setActiveLink("home"); setMobileMenuOpen(false); }}>
+                                    <Home className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                    <span className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Home</span>
                                 </Link>
 
-                                <button
-                                    onClick={() => handleNavigation("ourJourney")}
-                                    className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                >
-                                    <Info
-                                        className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Our Journey
-                                    </span>
-                                </button>
+                                {/* Our Journey */}
+                                <Link href='/ourJourney' onClick={() => { setActiveLink("ourJourney"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                    <Info className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                    <span className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Our Journey</span>
+                                </Link>
 
-                                <button
-                                    onClick={() => handleNavigation("AdaptAi")}
-                                    className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                >
-                                    <Globe
-                                        className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Adapt AI
-                                    </span>
-                                </button>
+                                {/* Adapt AI with Subsections */}
+                                <Link href='/AdaptAi' onClick={() => { setActiveLink("AdaptAi"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                    <Globe className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                    <span className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Adapt AI</span>
+                                </Link>
 
-                                <button
-                                    onClick={() => handleNavigation("offerings")}
-                                    className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                >
-                                    <Globe
-                                        className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Offerings
-                                    </span>
-                                </button>
+                                {/* Offerings */}
+                                <Link href='/offerings' onClick={() => { setActiveLink("offerings"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                    <Gift className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                    <span className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Offerings</span>
+                                </Link>
 
-                                <button
-                                    onClick={() => handleNavigation("knowledge-base")}
-                                    className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                >
-                                    <Globe
-                                        className={activeLink === "knowledge-base" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "knowledge-base" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Knowledge base
-                                    </span>
-                                </button>
+                                {/* Knowledge Base with Subsections */}
+                                <div>
+                                    <button onClick={() => toggleSubmenu("knowledgeBase")} className="flex items-center justify-between space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                        <div className="flex items-center space-x-2">
+                                            <Book className={activeLink.includes('blog') || activeLink.includes('videos') ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                            <span className={activeLink.includes('blog') || activeLink.includes('videos') ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Knowledge Base</span>
+                                        </div>
+                                        <ChevronDown strokeWidth={1.5} className={`${mobileSubMenuOpen["knowledgeBase"] ? "rotate-180" : ""} transition-transform duration-200 w-4 h-4`} />
+                                    </button>
+                                    <AnimatePresence>
+                                        {mobileSubMenuOpen["knowledgeBase"] && (
+                                            <motion.div
+                                                className="rounded-xl pl-10 w-4/5 focus:outline-none overflow-hidden"
+                                                initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                                            >
+                                                <div className="p-1 space-y-1">
+                                                    {['blog', 'videos'].map((item, index) => (
+                                                        <motion.div
+                                                            key={index}
+                                                            custom={index}
+                                                            initial="hidden"
+                                                            animate="visible"
+                                                            variants={itemVariants}
+                                                        >
+                                                            <Link
+                                                                href={`/${item}`}
+                                                                className={`${activeLink === item
+                                                                    ? 'text-primary bg-background-secondary dark:text-dark-primary dark:bg-dark-background-secondary'
+                                                                    : 'hover:text-foreground dark:hover:text-dark-foreground text-muted-foreground dark:text-dark-muted-foreground hover:bg-background-secondary dark:hover:bg-dark-background-secondary'
+                                                                    } group capitalize rounded-lg flex items-center px-3 py-2 text-sm transition-all duration-200 ease-out`}
+                                                                onClick={() => { setActiveLink(item); setMobileMenuOpen(false); }}
+                                                            >
+                                                                {item === 'blog' && (
+                                                                    <BookOpen
+                                                                        className={`${activeLink === item ? '' : 'group-hover:text-primary dark:group-hover:text-dark-primary'
+                                                                            } w-4 h-4 mr-2`}
+                                                                    />
+                                                                )}
+                                                                {item === 'videos' && (
+                                                                    <Video
+                                                                        className={`${activeLink === item ? '' : 'group-hover:text-primary dark:group-hover:text-dark-primary'
+                                                                            } w-4 h-4 mr-2`}
+                                                                    />
+                                                                )}
+                                                                {item}
+                                                                {item === 'blog' && (
+                                                                    <span className="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary dark:bg-dark-primary dark:text-dark-foreground text-dark-foreground">
+                                                                        New
+                                                                    </span>
+                                                                )}
+                                                            </Link>
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
 
-                                <Link
-                                    href="/contact-us"
-                                    className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors"
-                                    onClick={() => {
-                                        setActiveLink("contact");
-                                        setMobileMenuOpen(false);
-                                    }}
-                                >
-                                    <Contact
-                                        className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"}
-                                        size={20}
-                                    />
-                                    <span
-                                        className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}
-                                    >
-                                        Contact
-                                    </span>
+                                {/* Contact */}
+                                <Link href="/contact-us" className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors" onClick={() => { setActiveLink("contact"); setMobileMenuOpen(false); }}>
+                                    <Contact className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
+                                    <span className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Contact</span>
                                 </Link>
 
                                 <div className="h-px bg-[hsl(214.3,31.8%,91.4%)] my-4" />

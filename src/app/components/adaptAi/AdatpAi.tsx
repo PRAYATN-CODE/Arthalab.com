@@ -40,6 +40,17 @@ const AdatpAi = () => {
                     >
                         {/* Left Column: Image & Feature List */}
                         <div className="flex flex-col items-center lg:items-start gap-8">
+                            
+                             <motion.h2
+                                className="lg:hidden block text-4xl md:text-5xl font-bold leading-tight text-foreground dark:text-dark-foreground"
+                                variants={itemVariants}
+                            >
+                                Transform Ideas into Algo Bots, with{" "}
+                                <span className="text-primary dark:text-dark-primary">
+                                    Simple Prompts
+                                </span>
+                            </motion.h2>
+
                             <motion.div
                                 className="w-full relative bg-card dark:bg-dark-card rounded-2xl p-1 shadow border border-border dark:border-dark-border"
                                 variants={itemVariants}
@@ -56,7 +67,7 @@ const AdatpAi = () => {
 
                             {/* Feature List */}
                             <motion.div
-                                className="w-full grid grid-cols-2 gap-6"
+                                className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6"
                                 variants={containerVariants}
                             >
                                 <motion.div
@@ -71,6 +82,7 @@ const AdatpAi = () => {
                                         <p className="text-sm text-muted-foreground dark:text-dark-muted-foreground">In seconds with simple prompts.</p>
                                     </div>
                                 </motion.div>
+                                
                                 <motion.div
                                     className="flex items-start gap-3 bg-card dark:bg-dark-card p-6 rounded-lg shadow-sm border border-border dark:border-dark-border"
                                     variants={itemVariants}
@@ -83,6 +95,7 @@ const AdatpAi = () => {
                                         <p className="text-sm text-muted-foreground dark:text-dark-muted-foreground">From TradingView, Chartink & more.</p>
                                     </div>
                                 </motion.div>
+                                
                                 <motion.div
                                     className="flex items-start gap-3 bg-card dark:bg-dark-card p-6 rounded-lg shadow-sm border border-border dark:border-dark-border"
                                     variants={itemVariants}
@@ -95,6 +108,7 @@ const AdatpAi = () => {
                                         <p className="text-sm text-muted-foreground dark:text-dark-muted-foreground">Zero DevOps or setup hassle.</p>
                                     </div>
                                 </motion.div>
+
                                 <motion.div
                                     className="flex items-start gap-3 bg-card dark:bg-dark-card p-6 rounded-lg shadow-sm border border-border dark:border-dark-border"
                                     variants={itemVariants}
@@ -113,7 +127,7 @@ const AdatpAi = () => {
                         {/* Right Column: Heading & Paragraph */}
                         <div className="space-y-8">
                             <motion.h2
-                                className="text-4xl md:text-5xl font-bold leading-tight text-foreground dark:text-dark-foreground"
+                                className="hidden lg:block text-4xl md:text-5xl font-bold leading-tight text-foreground dark:text-dark-foreground"
                                 variants={itemVariants}
                             >
                                 Transform Ideas into Algo Bots, with{" "}

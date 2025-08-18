@@ -64,7 +64,7 @@ const ContactUs = () => {
 
   return (
     <div className="bg-background dark:bg-dark-background">
-      <div className="w-full h-[300px] flex-col space-y-8 bg-background-secondary dark:bg-dark-background-secondary flex justify-center items-center relative overflow-hidden">
+      <div className="w-full h-[300px] flex-col space-y-8 bg-background-secondary dark:bg-dark-background-secondary px-4 sm:px-6 flex justify-center items-center relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute w-40 h-40 rounded-full bg-primary/5 blur-3xl top-1/4 left-1/4 animate-float" />
           <div
@@ -91,7 +91,7 @@ const ContactUs = () => {
         </motion.h2>
       </div>
 
-      <div className="max-w-6xl mx-auto py-16 px-4">
+      <div className="max-w-6xl mx-auto py-16 px-4 sm:px-6">
         <div className="grid md:grid-cols-[400px_1fr] gap-6">
           {/* Contact Information Card */}
           <div className="crypto-card p-8 h-full">

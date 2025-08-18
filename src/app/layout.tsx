@@ -3,6 +3,7 @@ import { Source_Sans_3 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/ui/Footer";
 import Navbar from "./components/ui/Navbar";
+import TelegramButton from "./components/ui/TelegramButton";
 import "./globals.css";
 
 // ✅ Import Source Sans 3
@@ -89,6 +90,7 @@ export default function RootLayout({
         <div className="min-h-dvh flex-1 w-full text-foreground dark:text-dark-foreground bg-background dark:bg-dark-background">
           {children}
         </div>
+        <TelegramButton/>
         <Footer />
         {/* Toaster MUST be inside body */}
         <Toaster position="bottom-center" />

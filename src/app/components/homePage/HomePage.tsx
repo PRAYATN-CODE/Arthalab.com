@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Bot, BrainCircuit, Check, ChevronLeft, ChevronRight, Cpu, LineChart, Plug, Quote, Zap } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cardVariants, fadeIn, fadeInUp, slideVariants } from '../animation/Homepage';
 import { brokers, edges, features, stats, testimonials } from "../data/homePage";
@@ -25,6 +24,8 @@ const staggerChildren = {
         },
     },
 }
+
+const url = process.env.NEXT_PUBLIC_APP_URL
 
 // components/HeroSection.jsx
 export default function HomePage() {
@@ -48,6 +49,8 @@ export default function HomePage() {
             return () => window.removeEventListener('storage', handleStorageChange);
         }
     }, []);
+
+    console.log(url)
 
     const paginate = (newDirection: number) => {
         setDirection(newDirection);
@@ -98,25 +101,27 @@ export default function HomePage() {
 
                             {/* Call-to-Action */}
                             <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
-                                <Link href="/auth/login" passHref>
-                                    <motion.button
-                                        className="gradient-border bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2 group"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
+                                <motion.a
+                                    href={url}
+                                    className="gradient-border bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    target="_blank"
                                     >
-                                        Start Trading Today
-                                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                    </motion.button>
-                                </Link>
-                                <Link href="#about" passHref>
-                                    <motion.button
-                                        className="bg-muted dark:bg-dark-muted/20 text-foreground dark:text-dark-foreground px-8 py-4 rounded-lg font-semibold hover:bg-muted dark:hover:bg-dark-muted transition-colors"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                    >
-                                        Learn More
-                                    </motion.button>
-                                </Link>
+                                    Start Trading Today
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                </motion.a>
+
+                                {/* Secondary Button / Span */}
+                                <motion.a
+                                    href={url}
+                                    className="bg-muted dark:bg-dark-muted/20 text-foreground dark:text-dark-foreground px-8 py-4 rounded-lg font-semibold hover:bg-muted dark:hover:bg-dark-muted transition-colors"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    target="_blank"
+                                >
+                                    Learn More
+                                </motion.a>
                             </motion.div>
 
                             {/* SEBI Info */}
