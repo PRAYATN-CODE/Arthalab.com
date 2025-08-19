@@ -9,19 +9,19 @@ const TelegramButton = () => {
             href={telegramLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-8 right-6 z-50 flex items-center justify-center"
+            className="fixed bottom-4 right-3 z-50 flex items-center justify-center animate-bounce duration-100 ease-out"
         >
             {/* Pulse animation */}
-            <div className="absolute w-12 h-12 rounded-full bg-[#36aced] animate-ping transition-all duration-1000 ease-in-out"></div>
+            <div className="absolute w-8 h-8 rounded-full bg-[#36aced] animate-ping transition-all duration-1000 ease-in-out"></div>
 
             {/* Main button */}
-            <div className="relative w-12 h-12 bg-[#36aced] hover:bg-[#36aced]/60 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 ease-out">
+            <div className="relative w-12 h-12 hover:scale-105 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 ease-out">
                 <Image
                     src={'/logo/telegram.webp'}
                     alt="Telegram"
                     width={100}
                     height={100}
-                    className="w-[90%] h-[90%]"
+                    className="w-full h-full"
                 />
             </div>
         </a>

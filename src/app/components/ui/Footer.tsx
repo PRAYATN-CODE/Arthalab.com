@@ -20,6 +20,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const socialLink = {
+  linkedin: 'https://www.linkedin.com/company/arthalab/',
+  x: 'https://x.com/arthalab',
+  facebook: 'https://www.facebook.com/arthalab.solutions',
+  instagram: 'https://www.instagram.com/arthalab.solutions/'
+}
+
 const Footer = () => {
   const [isDark, setIsDark] = useState(false);
   const [email, setEmail] = useState("");
@@ -27,6 +34,12 @@ const Footer = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter()
+  const socialLinks = [
+    { href: socialLink.facebook, label: "Facebook", Icon: Facebook },
+    { href: socialLink.x, label: "Twitter", Icon: Twitter },
+    { href: socialLink.instagram, label: "Instagram", Icon: Instagram },
+    { href: socialLink.linkedin, label: "LinkedIn", Icon: Linkedin },
+  ];
 
   // Listen for theme changes using MutationObserver
   useEffect(() => {
@@ -77,7 +90,7 @@ const Footer = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
+      if (window.pageYOffset > 500) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -180,35 +193,22 @@ const Footer = () => {
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
               Empowering traders with intelligent automation and data-driven strategies for smarter algo trading.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white transition-all duration-300"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href="#"
-                className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href="#"
-                className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
-              <a
-                href="#"
-                className="group flex items-center justify-center w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </a>
+            <div className="flex gap-4">
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center w-9 h-9 rounded-full 
+            bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 
+            hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white 
+            transition-all duration-300"
+                  aria-label={label}
+                >
+                  <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -222,48 +222,39 @@ const Footer = () => {
               <li>
                 <Link
                   href="/contact-us"
-                  className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
+                  className="text-sm group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-400 mr-2 transition-colors duration-200"></span>
                   Contact us
                 </Link>
               </li>
               <li>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
+                <Link
+                  href="/ourJourney"
+                  className="text-sm group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-400 mr-2 transition-colors duration-200"></span>
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("features")}
-                  className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-400 mr-2 transition-colors duration-200"></span>
-                  Features
-                </button>
+                  Our Journey
+                </Link>
               </li>
               <li>
                 <Link
-                  href="/terms-and-conditions"
-                  className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
+                  href="/AdaptAi"
+                  className="text-sm group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-400 mr-2 transition-colors duration-200"></span>
-                  Terms and Conditions
+                  Adapt AI
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link
-                  href="/privacy-policy"
-                  className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
+                  href="/offerings"
+                  className="text-sm group flex items-center text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-200"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 group-hover:bg-cyan-500 dark:group-hover:bg-cyan-400 mr-2 transition-colors duration-200"></span>
-                  Privacy Policy
+                  Offerings
                 </Link>
-              </li> */}
+              </li>
             </ul>
           </div>
 

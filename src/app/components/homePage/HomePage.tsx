@@ -1,12 +1,13 @@
 'use client'
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Bot, BrainCircuit, Check, ChevronLeft, ChevronRight, Cpu, LineChart, Plug, Quote, Zap } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Check, ChevronLeft, ChevronRight, Cpu, Plug, Quote, Zap } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { cardVariants, fadeIn, fadeInUp, slideVariants } from '../animation/Homepage';
 import { brokers, edges, features, stats, testimonials } from "../data/homePage";
 import BackgroundDots from "../ui/BackgroundDots";
+import DisclaimerSection from "../ui/DisclaimerSection";
 
 
 const staggerChildren = {
@@ -50,8 +51,6 @@ export default function HomePage() {
         }
     }, []);
 
-    console.log(url)
-
     const paginate = (newDirection: number) => {
         setDirection(newDirection);
         setIndex((prevIndex) => (prevIndex + newDirection + testimonials.length) % testimonials.length);
@@ -67,88 +66,108 @@ export default function HomePage() {
                     <div className="max-w-6xl min-h-dvh mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
 
                         {/* Hero Content */}
+                        {/* Hero Content - Left Side */}
                         <motion.div
-                            className="flex-1 space-y-10"
+                            className="flex-1 space-y-10 text-center md:text-left"
                             initial="offscreen"
                             whileInView="onscreen"
+                            animate="onscreen"
                             viewport={{ once: true, amount: 0.3 }}
                             variants={staggerChildren}
                         >
                             {/* Tagline */}
                             <motion.div className="flex flex-col space-y-6" variants={fadeInUp}>
-                                <div className="inline-flex px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-2 self-start">
+                                {/* Badge / Tagline */}
+                                <div className="inline-flex px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-2 self-center md:self-start">
                                     A Unique Blend of Market Insight & Technology
                                 </div>
-                                <h1 className="text-3xl md:text-5xl font-bold leading-tight dark:text-muted">
-                                    Where <span className="text-primary">Regulatory Expertise</span>
-                                    Meets <span className="text-primary">Cutting-Edge Tech</span>
+
+                                {/* Heading */}
+                                <h1 className="text-3xl md:text-5xl font-bold leading-tight text-foreground dark:text-dark-foreground">
+                                    Where <span className="text-primary dark:text-dark-primary">Regulatory Expertise</span>
+                                    <br className="hidden md:block" />
+                                    Meets <span className="text-primary dark:text-dark-primary">Cutting-Edge Tech</span>
                                 </h1>
-                                <span className="text-muted-foreground/90 dark:text-muted text-lg">
-                                    SEBI-Registered Research Analysts with 15+ years of IT expertise — delivering legally sound,
-                                    technologically advanced solutions for smarter, safer trading.
+
+                                {/* Subtext */}
+                                <span className="text-muted-foreground/90 dark:text-dark-muted-foreground text-lg md:text-xl max-w-2xl">
+                                    SEBI-Registered Research Analysts with 15+ years of IT expertise — delivering
+                                    legally sound, technologically advanced solutions for smarter, safer trading.
                                 </span>
                             </motion.div>
 
                             {/* Description */}
                             <motion.p
-                                className="text-muted-foreground dark:text-muted/60 max-w-xl text-base leading-relaxed"
+                                className="text-muted-foreground dark:text-dark-muted-foreground/60 max-w-xl text-base leading-relaxed mx-auto md:mx-0"
                                 variants={fadeInUp}
                             >
-                                Isn&apos;t that a blend worth trusting? With Arthalab, you get a SEBI-registered RA platform
-                                that merges compliance, strategy, and technology — built to give you an edge in today&apos;s
-                                markets, while ensuring safety, transparency, and reliability.
+                                Isn't that a blend worth trusting? With Arthalab, you get a SEBI-registered RA
+                                platform that merges compliance, strategy, and technology — built to give you
+                                an edge in today's markets, while ensuring safety, transparency, and reliability.
                             </motion.p>
 
-                            {/* Call-to-Action */}
-                            <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
+
+                            {/* Call-to-Action Buttons */}
+                            <motion.div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4" variants={fadeInUp}>
+
                                 <motion.a
                                     href={url}
-                                    className="gradient-border bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2"
+                                    className="gradient-border bg-primary text-primary-foreground dark:bg-dark-primary dark:text-dark-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 dark:hover:bg-dark-primary/90 transition-colors flex items-center justify-center gap-2 group"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     target="_blank"
-                                    >
+                                >
                                     Start Trading Today
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </motion.a>
 
-                                {/* Secondary Button / Span */}
                                 <motion.a
                                     href={url}
-                                    className="bg-muted dark:bg-dark-muted/20 text-foreground dark:text-dark-foreground px-8 py-4 rounded-lg font-semibold hover:bg-muted dark:hover:bg-dark-muted transition-colors"
+                                    className="bg-muted dark:bg-dark-muted/20 border border-border dark:border-dark-border text-foreground dark:text-dark-foreground px-8 py-4 rounded-lg font-semibold hover:bg-muted dark:hover:bg-dark-muted transition-colors flex items-center justify-center"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     target="_blank"
                                 >
                                     Learn More
                                 </motion.a>
-                            </motion.div>
 
-                            {/* SEBI Info */}
-                            {/* <motion.div
-                                className="flex items-center gap-4 mt-6 bg-muted/30 dark:bg-dark-muted/10 p-4 rounded-lg"
-                                variants={fadeInUp}
-                            >
-                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary">
-                                    <img
-                                        src="/your-photo.jpg" // replace with your actual image path
-                                        alt="SEBI Registered Analyst"
-                                        className="w-full h-full object-cover"
-                                    />
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Hero Image - Right Side */}
+                        <motion.div
+                            className="flex-1 flex flex-col gap-6 justify-center items-center"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                            transition={{ duration: 0.8 }}
+                        >
+
+                            {/* NEW — Trust Highlight */}
+                            <div className="w-full grid grid-cols-1 sm:grid-cols-2 items-start sm:items-center justify-start gap-4 mt-4">
+                                <div className="px-5 py-2 bg-gradient-to-r from-primary/10 to-primary/5 rounded-full text-sm font-semibold text-primary dark:text-dark-pirmary shadow-xl dark:drop-shadow-primary">
+                                    🚀 Successfully Serving Algo Traders Since 2016
                                 </div>
-                                <div>
-                                    <p className="font-semibold text-foreground">
-                                        Abhisekh
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        SEBI Registered Research Analyst — License No. INH000000000
-                                    </p>
-                                </div>
-                            </motion.div> */}
+                                <span className="text-sm text-muted-foreground dark:text-dark-muted-foreground bg-muted dark:bg-dark-muted/50 px-3 py-3 rounded-full " >⚡ 8+ Years Experience</span>
+                                <span className="text-sm text-muted-foreground dark:text-dark-muted-foreground bg-muted dark:bg-dark-muted/50 px-3 py-3 rounded-full " >🤖 Algo Bots Automated</span>
+                                <span className="text-sm text-muted-foreground dark:text-dark-muted-foreground bg-muted dark:bg-dark-muted/50 px-3 py-3 rounded-full " >🌍 Trusted by Global Traders</span>
+                            </div>
+
+                            {/* Use a relevant image for your platform, e.g., an app screenshot or a conceptual image */}
+                            <Image
+                                src={theme === 'dark' ? '/images/heroDark.png' : '/images/hero.png'}
+                                alt="Arthalab Platform Overview"
+                                width={600}
+                                height={400}
+                                className="rounded-2xl shadow-lg border border-border dark:border-dark-border"
+                                priority={true}
+                            />
+
                         </motion.div>
 
                         {/* Visual Element Section */}
-                        <motion.div
+                        {/* <motion.div
                             className="relative flex-1 flex justify-center items-center p-8 md:p-12"
                             initial="offscreen"
                             whileInView="onscreen"
@@ -172,7 +191,7 @@ export default function HomePage() {
                                     strokeWidth={1.5}
                                 />
                             </motion.div>
-                        </motion.div>
+                        </motion.div> */}
                     </div>
                 </section>
 
@@ -270,8 +289,7 @@ export default function HomePage() {
                         <motion.div
                             className="space-y-24"
                             initial="offscreen"
-                            animate='onscreen'
-                            // animate={true}
+                            whileInView="onscreen"
                             viewport={{ once: true, amount: 0.3 }}
                             variants={staggerChildren}
                         >
@@ -569,7 +587,7 @@ export default function HomePage() {
                                 Ready to build your first algo bot?
                             </h3>
                             <a
-                                href="https://app.arthalab.com/dashboard/ai-strategy"
+                                href={`${url}/dashboard/ai-strategy`}
                                 target="_blank"
                                 className="inline-block mt-4 px-8 text-white py-4 bg-primary dark:bg-dark-primary font-semibold rounded-full hover:bg-primary/90 dark:hover:bg-dark-primary/90 transition-colors"
                             >
@@ -800,7 +818,7 @@ export default function HomePage() {
                                         setDirection(dotIndex > index ? 1 : -1);
                                         setIndex(dotIndex);
                                     }}
-                                    className={`w-3 h-3 rounded-full transition-colors duration-300 ${dotIndex === index ? "bg-primary dark:bg-dark-primary" : "bg-muted-foreground/50 dark:bg-dark-muted-foreground/50"
+                                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${dotIndex === index ? "bg-primary dark:bg-dark-primary scale-[1.5]" : "bg-muted-foreground/50 dark:bg-dark-muted-foreground/50 transition-all duration-300 ease-out"
                                         }`}
                                     whileHover={{ scale: 1.2 }}
                                     whileTap={{ scale: 0.9 }}
@@ -809,6 +827,8 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
+
+                <DisclaimerSection />
 
             </main>
         </>

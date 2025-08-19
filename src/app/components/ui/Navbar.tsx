@@ -122,16 +122,6 @@ const Navbar = () => {
         }
     };
 
-    const handleNavigation = (section: string) => {
-        if (window.location.pathname === "/") {
-            scrollToSection(section);
-            setActiveLink(section);
-        } else {
-            router.push(`/?scrollTo=${section}`);
-        }
-        setMobileMenuOpen(false);
-    };
-
     const toggleSubmenu = (menu: string) => {
         setMobileSubMenuOpen(prev => ({ ...prev, [menu]: !prev[menu] }));
     };
@@ -218,7 +208,7 @@ const Navbar = () => {
                         </div>
 
                         {/* Actions */}
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center gap-4">
 
                             <ThemeToggle />
 
@@ -227,10 +217,20 @@ const Navbar = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="md:hidden flex items-center justify-center h-9 w-9 rounded-full bg-[hsl(210,40%,96.1%)] hover:bg-[hsl(210,40%,96%)] text-[hsl(215.4,16.3%,46.9%)]"
+                                className="md:hidden flex items-center justify-center h-9 w-9 rounded-full bg-background-secondary dark:bg-dark-background-secondary text-muted-foreground dark:text-dark-muted-foreground border border-border dark:border-dark-border"
                             >
                                 {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
                             </motion.button>
+
+                            <motion.a
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/signup`}
+                                target="_blank"
+                                className="hidden md:flex items-center justify-center h-9 w-auto px-4 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500/50 animate-[pulse_2s_ease-in-out_infinite]"
+                            >
+                                Login
+                            </motion.a>
                         </div>
                     </div>
                 </div>
@@ -239,57 +239,59 @@ const Navbar = () => {
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {mobileMenuOpen && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-[hsl(210,40%,98%)]/80 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 bg-background/80 dark:bg-dark-background/80 backdrop-blur-sm lg:hidden" onClick={() => setMobileMenuOpen(false)}>
                         <motion.div
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="fixed right-0 top-0 bottom-0 w-3/4 max-w-sm bg-[hsl(0,0%,100%)] shadow-xl p-6 z-50"
+                            className="fixed right-0 top-0 bottom-0 w-3/4 max-w-sm bg-background dark:bg-dark-background shadow-xl p-6 z-50"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="flex justify-between items-center mb-8">
-                                <h2 className="text-lg font-bold text-[hsl(222.2,84%,4.9%)]">
+                                <Link href='/' className="text-lg font-bold text-[hsl(222.2,84%,4.9%)]">
                                     <span className="text-[hsl(221.2,83.2%,53.3%)]">Artha</span>lab
-                                </h2>
-                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-full bg-[hsl(210,40%,96.1%)] text-[hsl(215.4,16.3%,46.9%)]">
+                                </Link>
+                                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setMobileMenuOpen(false)}
+                                    className="p-2 rounded-full bg-muted-foreground dark:bg-dark-muted-foreground text-muted-foreground dark:text-dark-muted-foreground"
+                                >
                                     <X className="h-5 w-5" />
                                 </motion.button>
                             </div>
 
                             <div className="space-y-4">
                                 {/* Home */}
-                                <Link href="/" className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors" onClick={() => { setActiveLink("home"); setMobileMenuOpen(false); }}>
+                                <Link href="/" className="flex items-center space-x-2 p-3 rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors" onClick={() => { setActiveLink("home"); setMobileMenuOpen(false); }}>
                                     <Home className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                    <span className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Home</span>
+                                    <span className={activeLink === "home" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Home</span>
                                 </Link>
 
                                 {/* Our Journey */}
-                                <Link href='/ourJourney' onClick={() => { setActiveLink("ourJourney"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                <Link href='/ourJourney' onClick={() => { setActiveLink("ourJourney"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors">
                                     <Info className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                    <span className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Our Journey</span>
+                                    <span className={activeLink === "ourJourney" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Our Journey</span>
                                 </Link>
 
                                 {/* Adapt AI with Subsections */}
-                                <Link href='/AdaptAi' onClick={() => { setActiveLink("AdaptAi"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                <Link href='/AdaptAi' onClick={() => { setActiveLink("AdaptAi"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors">
                                     <Globe className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                    <span className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Adapt AI</span>
+                                    <span className={activeLink === "AdaptAi" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Adapt AI</span>
                                 </Link>
 
                                 {/* Offerings */}
-                                <Link href='/offerings' onClick={() => { setActiveLink("offerings"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                <Link href='/offerings' onClick={() => { setActiveLink("offerings"); setMobileMenuOpen(false); }} className="flex items-center space-x-2 p-3 w-full text-left rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors">
                                     <Gift className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                    <span className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Offerings</span>
+                                    <span className={activeLink === "offerings" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Offerings</span>
                                 </Link>
 
                                 {/* Knowledge Base with Subsections */}
                                 <div>
-                                    <button onClick={() => toggleSubmenu("knowledgeBase")} className="flex items-center justify-between space-x-2 p-3 w-full text-left rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors">
+                                    <button onClick={() => toggleSubmenu("knowledgeBase")} className="flex items-center justify-between space-x-2 p-3 w-full text-left rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors">
                                         <div className="flex items-center space-x-2">
                                             <Book className={activeLink.includes('blog') || activeLink.includes('videos') ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                            <span className={activeLink.includes('blog') || activeLink.includes('videos') ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Knowledge Base</span>
+                                            <span className={activeLink.includes('blog') || activeLink.includes('videos') ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Knowledge Base</span>
                                         </div>
-                                        <ChevronDown strokeWidth={1.5} className={`${mobileSubMenuOpen["knowledgeBase"] ? "rotate-180" : ""} transition-transform duration-200 w-4 h-4`} />
+                                        <ChevronDown strokeWidth={1.5} className={`${mobileSubMenuOpen["knowledgeBase"] ? "rotate-180" : ""} transition-transform duration-200 w-4 h-4 text-muted-foreground dark:text-dark-muted-foreground`} />
                                     </button>
                                     <AnimatePresence>
                                         {mobileSubMenuOpen["knowledgeBase"] && (
@@ -342,12 +344,21 @@ const Navbar = () => {
                                 </div>
 
                                 {/* Contact */}
-                                <Link href="/contact-us" className="flex items-center space-x-2 p-3 rounded-lg hover:bg-[hsl(210,40%,96.1%)] transition-colors" onClick={() => { setActiveLink("contact"); setMobileMenuOpen(false); }}>
+                                <Link href="/contact-us" className="flex items-center space-x-2 p-3 rounded-lg hover:text-[hsl(221.2,83.2%,53.3%)] transition-colors" onClick={() => { setActiveLink("contact"); setMobileMenuOpen(false); }}>
                                     <Contact className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)]" : "text-[hsl(215.4,16.3%,46.9%)]"} size={20} />
-                                    <span className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)]"}>Contact</span>
+                                    <span className={activeLink === "contact" ? "text-[hsl(221.2,83.2%,53.3%)] font-medium" : "text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"}>Contact</span>
                                 </Link>
 
-                                <div className="h-px bg-[hsl(214.3,31.8%,91.4%)] my-4" />
+                                <div className="h-px bg-border dark:bg-dark-border my-4" />
+                                <motion.a
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/signup`}
+                                    target="_blank"
+                                    className="md:hidden flex items-center justify-center h-9 w-auto px-4 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500/50 animate-[pulse_2s_ease-in-out_infinite]"
+                                >
+                                    Login
+                                </motion.a>
                             </div>
                         </motion.div>
                     </motion.div>

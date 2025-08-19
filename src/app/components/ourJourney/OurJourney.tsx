@@ -100,9 +100,9 @@ const OurJourney = () => {
                                     objectFit="cover"
                                 />
                             </div>
-                            <h3 className="text-3xl font-bold text-foreground dark:text-dark-foreground">
-                                [Abhisekh Gujrati]
-                            </h3>
+                            {/* <h3 className="text-3xl font-bold text-foreground dark:text-dark-foreground">
+                                Abhishek Gujrathi
+                            </h3> */}
                             <span className="text-lg text-primary dark:text-dark-primary font-semibold">
                                 SEBI Registered Research Analyst
                             </span>
