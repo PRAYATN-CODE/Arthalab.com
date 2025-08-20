@@ -64,9 +64,9 @@ export default function DisclaimerSection() {
                                 <Info className="w-5 h-5 text-accent dark:text-dark-accent" />
                                 <span>Regulatory Information</span>
                             </p>
-                            <p className="text-sm">
+{/*                             <p className="text-sm">
                                 Arthalab is a SEBI-registered Investment Advisor (Registration No. 123456789). While our platform empowers traders to create, test, and automate their own strategies using algo trading bots and APIs, we do not guarantee profits or risk-free trading.
-                            </p>
+                            </p> */}
                             <p className="text-sm">
                                 Our services and tools are designed to assist traders, not to replace personal judgment. Users must carefully evaluate their risk appetite before making any investment or trading decisions.
                             </p>
