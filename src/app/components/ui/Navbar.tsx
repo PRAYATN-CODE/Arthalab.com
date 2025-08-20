@@ -225,7 +225,7 @@ const Navbar = () => {
                             <motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/signup`}
+                                href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`}
                                 target="_blank"
                                 className="hidden md:flex items-center justify-center h-9 w-auto px-4 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500/50 animate-[pulse_2s_ease-in-out_infinite]"
                             >
@@ -353,7 +353,7 @@ const Navbar = () => {
                                 <motion.a
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/signup`}
+                                    href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`}
                                     target="_blank"
                                     className="md:hidden flex items-center justify-center h-9 w-auto px-4 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500/50 animate-[pulse_2s_ease-in-out_infinite]"
                                 >
