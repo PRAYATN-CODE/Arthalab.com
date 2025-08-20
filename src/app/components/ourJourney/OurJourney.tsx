@@ -103,7 +103,7 @@ const OurJourney = () => {
                             {/* <h3 className="text-3xl font-bold text-foreground dark:text-dark-foreground">
                                 Abhishek Gujrathi
                             </h3> */}
-                            <span className="text-lg text-primary dark:text-dark-primary font-semibold">
+                            {/*<span className="text-lg text-primary dark:text-dark-primary font-semibold">
                                 SEBI Registered Research Analyst
                             </span>
                             <div className="flex items-center gap-2 text-muted-foreground dark:text-dark-muted-foreground">
@@ -112,7 +112,7 @@ const OurJourney = () => {
                                     Registration No.:{" "}
                                     <span className="font-semibold">[SEBI License Number]</span>
                                 </p>
-                            </div>
+                            </div> */}
                         </motion.div>
 
                         {/* Text Content Section */}

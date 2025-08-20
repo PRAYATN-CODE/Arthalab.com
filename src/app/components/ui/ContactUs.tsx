@@ -27,7 +27,7 @@ const ContactUs = () => {
         message: formData.message,
       }
 
-      const response = await axios.post(`https://app.arthalab.com/api/send-mail`, payload, {
+      const response = await axios.post(`https://app.arthalab.com/api/contactUsEmail`, payload, {
         headers: {
           "Content-Type": "application/json",
         }
