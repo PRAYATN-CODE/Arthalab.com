@@ -26,9 +26,10 @@ export default function Blogs() {
       title: "What is Algo Trading?",
       description: "A comprehensive guide for beginners to understand the basics of algorithmic trading with zero coding.",
       icon: <BookOpen className="w-8 h-8 text-primary" />,
-      link: "#",
-      image: "/images/blog-1.jpg",
+      link: "/",
+      image: "/blog/step7.png",
       span: "col-span-1 row-span-2",
+      target: ''
     },
     {
       type: "video",
@@ -36,16 +37,19 @@ export default function Blogs() {
       description: "Watch a live demo of how our AI builder creates a functional bot from a simple prompt.",
       icon: <PlayCircle className="w-8 h-8 text-secondary" />,
       link: "#",
-      image: "/images/video-1.jpg",
+      image: "/blog/step1.png",
       span: "col-span-1 row-span-1",
+      target: ''
     },
     {
       type: "feature",
       title: "AI-Powered Backtesting",
       description: "Test your strategy against years of historical data with our advanced engine.",
       icon: <Cpu className="w-8 h-8 text-accent" />,
-      link: "#",
+      link: "AdaptAi",
+      image: "/blog/step3.png",
       span: "col-span-1 row-span-1",
+      target: ''
     },
     {
       type: "blog",
@@ -53,17 +57,19 @@ export default function Blogs() {
       description: "Unlock precision and speed with API trading. Learn how to connect your broker and go live.",
       icon: <Lightbulb className="w-8 h-8 text-primary" />,
       link: "#",
-      image: "/images/blog-2.jpg",
+      image: "/blog/step5.png",
       span: "col-span-1 row-span-1",
+      target: ''
     },
     {
       type: "video",
       title: "Understanding Options Spreads",
       description: "A quick explainer video on options strategies and how to automate them for profit.",
       icon: <PlayCircle className="w-8 h-8 text-secondary" />,
-      link: "#",
-      image: "/images/video-2.jpg",
+      link: "https://www.youtube.com/@arthalab/videos",
+      image: "/blog/step6.png",
       span: "col-span-1 row-span-2",
+      target: '_blank'
     },
   ];
 
@@ -87,7 +93,7 @@ export default function Blogs() {
               className={`relative group bg-card dark:bg-dark-card rounded-xl overflow-hidden shadow-lg border border-border dark:border-dark-border transition-all duration-300 ease-out hover:shadow-2xl ${item.span}`}
               variants={itemVariants}
             >
-              <a href={item.link} className="block w-full h-full">
+              <a href={item.link} target={item.target} className="block w-full h-full">
                 {item.image && (
                   <Image
                     src={item.image}

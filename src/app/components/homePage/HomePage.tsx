@@ -56,6 +56,18 @@ export default function HomePage() {
         setIndex((prevIndex) => (prevIndex + newDirection + testimonials.length) % testimonials.length);
     };
 
+    const scrollToPercentage = (percent: number): void => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const viewportHeight = window.innerHeight;
+
+        const targetY = (scrollHeight - viewportHeight) * (percent / 100);
+
+        window.scrollTo({
+            top: targetY,
+            behavior: "smooth", // smooth scroll
+        });
+    };
+
     return (
         <>
 
@@ -121,15 +133,14 @@ export default function HomePage() {
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                 </motion.a>
 
-                                <motion.a
-                                    href={url}
+                                <motion.button
+                                    onClick={() => scrollToPercentage(20)}
                                     className="bg-muted dark:bg-dark-muted/20 border border-border dark:border-dark-border text-foreground dark:text-dark-foreground px-8 py-4 rounded-lg font-semibold hover:bg-muted dark:hover:bg-dark-muted transition-colors flex items-center justify-center"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    target="_blank"
                                 >
                                     Learn More
-                                </motion.a>
+                                </motion.button>
 
                             </motion.div>
                         </motion.div>
@@ -165,33 +176,6 @@ export default function HomePage() {
                             />
 
                         </motion.div>
-
-                        {/* Visual Element Section */}
-                        {/* <motion.div
-                            className="relative flex-1 flex justify-center items-center p-8 md:p-12"
-                            initial="offscreen"
-                            whileInView="onscreen"
-                            viewport={{ once: true, amount: 0.3 }}
-                            variants={fadeIn}
-                        >
-                            <motion.div
-                                className="float-element text-primary"
-                                animate={{
-                                    y: [0, -15, 0],
-                                    rotate: [0, 2, 0, -2, 0],
-                                }}
-                                transition={{
-                                    duration: 6,
-                                    repeat: Number.POSITIVE_INFINITY,
-                                    ease: "easeInOut",
-                                }}
-                            >
-                                <LineChart
-                                    className="w-32 h-32 md:w-64 md:h-64"
-                                    strokeWidth={1.5}
-                                />
-                            </motion.div>
-                        </motion.div> */}
                     </div>
                 </section>
 
@@ -290,6 +274,7 @@ export default function HomePage() {
                             className="space-y-24"
                             initial="offscreen"
                             whileInView="onscreen"
+                            animate="onscreen"
                             viewport={{ once: true, amount: 0.3 }}
                             variants={staggerChildren}
                         >
