@@ -77,7 +77,6 @@ export default function HomePage() {
                     <BackgroundDots />
                     <div className="max-w-6xl min-h-dvh mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
 
-                        {/* Hero Content */}
                         {/* Hero Content - Left Side */}
                         <motion.div
                             className="flex-1 space-y-10 text-center md:text-left"
@@ -96,9 +95,7 @@ export default function HomePage() {
 
                                 {/* Heading */}
                                 <h1 className="text-3xl md:text-5xl font-bold leading-tight text-foreground dark:text-dark-foreground">
-                                    Where <span className="text-primary dark:text-dark-primary">Regulatory Expertise</span>
-                                    <br className="hidden md:block" />
-                                    Meets <span className="text-primary dark:text-dark-primary">Cutting-Edge Tech</span>
+                                    <span className="text-primary dark:text-dark-primary">Trusted Expertise</span>, Powered by <span className="text-primary dark:text-dark-primary">AI</span>
                                 </h1>
 
                                 {/* Subtext */}

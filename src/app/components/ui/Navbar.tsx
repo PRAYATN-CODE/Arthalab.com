@@ -15,6 +15,7 @@ import {
     Video,
     X
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -138,15 +139,23 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                <div className="max-w-7xl mx-auto px-4 h-full">
+                <div className="max-w-7xl lg:max-w-[calc(100%-8%)] mx-auto px-4 h-full">
                     <div className="flex items-center justify-between h-full">
                         {/* Logo */}
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => router.push("/")}
-                            className="cursor-pointer font-bold text-xl text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"
+                            className="cursor-pointer flex items-center justify-start font-bold text-xl text-[hsl(222.2,84%,4.9%)] dark:text-accent-foreground"
                         >
+                            <Image
+                                src='/arthalabLogo2.png'
+                                alt="Logo"
+                                width={100}
+                                height={100}
+                                priority={true}
+                                className="w-10 h-10 mr-0.5"
+                            />
                             <span className="text-[hsl(221.2,83.2%,53.3%)]">Artha</span>lab
                         </motion.div>
 

@@ -20,8 +20,7 @@ export const metadata: Metadata = {
   },
   description:
     "Arthalab is India's premier AI-powered algo trading platform. Deploy intelligent algo bots for options, equities, and futures trading. Build no-code strategies, backtest with AI, and trade via API on top brokers like AngelOne, Dhan, Aliceblue, 5paisa, Fyers, and more. From retail traders to HNI investors, our AI algo trading solutions deliver precision, speed, and consistent returns.",
-  keywords:
-    "algo trading, algo bots, AI algo trading, algorithmic trading, algo trading bots, options algo trading, API trading, AI strategy builder, backtesting engine, automated trading bots India, HNI algo solutions",
+  keywords:"algo trading, algo bots, AI algo trading, algorithmic trading, algo trading bots, options algo trading, API trading, AI strategy builder, backtesting engine, automated trading bots India, HNI algo solutions",
 
   // Open Graph (Facebook, LinkedIn, WhatsApp etc.)
   openGraph: {
